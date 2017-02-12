@@ -2,7 +2,6 @@ import RPi.GPIO as gpio
 import time
 
 LED_PIN = 18
-LED_STATE = True
 
 """
 Set the mode (either BOARD or BCM)
@@ -18,11 +17,8 @@ gpio.setup(LED_PIN, gpio.OUT)
 try:
     # loop forever
     while True:
-        # set the LED state. You can use either
-        # gpio.HIGH/gpio.LOW, True/False, 1/0
-        gpio.output(LED_PIN, LED_STATE)
-        # toggle the LED state
-        LED_STATE = not LED_STATE
+        # set the LED state to the opposite of the current state
+        gpio.output(LED_PIN, not gpio.input(LED_PIN))
         # wait for 1 second
         time.sleep(1)
 except KeyboardInterrupt:
